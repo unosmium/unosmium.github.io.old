@@ -11,6 +11,7 @@ layout: base
 
 {% assign teams = site.data[tournament]['Teams'] %}
 {% assign events = site.data[tournament]['Events'] %}
+{% assign placings = site.data[tournament]['Placings'] %}
 
 <table class="results-table-classic mx-auto">
 
@@ -26,6 +27,11 @@ layout: base
   <tr>
     <td>{{ team.number }}</td>
     <td>{{ team.school }}</td>
+
+    {% for event in events %}
+      {% assign placing = placings | where: 'team', team.number | where: 'event', event.name %}
+      <td>{{ placing.first.place }}</td>
+    {% endfor %}
   </tr>
 {% endfor %}
 
