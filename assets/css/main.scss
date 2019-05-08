@@ -1,0 +1,14 @@
+---
+---
+@import 'colors';
+@import 'functions';
+@import 'mixins';
+@import 'variables';
+
+.results-header {
+  @include media-breakpoint-down(sm) {
+    h1 {
+      @include typography-display-3;
+    }
+  }
+}
