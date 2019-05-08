@@ -4,7 +4,7 @@ layout: base
 
 {%- include results_nav.html -%}
 
-<main class="container-fluid mt-5" aria-label="Content">
+<main class="container-fluid my-5" aria-label="Content">
 {{ content }}
 
 {% assign tournament = page.path | split: '.' | first | split: '/' | last %}
@@ -12,13 +12,13 @@ layout: base
 {% assign teams = site.data[tournament]['Teams'] %}
 {% assign events = site.data[tournament]['Events'] %}
 
-<table>
+<table class="results-table-classic mx-auto">
 
   <tr>
     <th></th>
     <th></th>
   {% for event in events %}
-    <th>{{ event.name }}</th>
+    <th class="event">{{ event.name }}</th>
   {% endfor %}
   </tr>
 
