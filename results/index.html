@@ -7,11 +7,17 @@ layout: results_index
     <h2 class="card-title">Nationals</h2>
   </div>
   <ul class="list-group list-group-flush">
+
   {% for x in site.data %}
     <a href="{{ x[0] }}" class="list-group-item">
-    {{ x[1]["Tournament"]["date"] }} Nationals @ {{ x[1]["Tournament"]["location"] }}
-    <i class="material-icons float-right">play_arrow</i>
+
+      {{ x[1]["Tournament"]["date"] }} Nationals 
+      Div {{ x[1]["Tournament"]["division"] }} 
+      @ {{ x[1]["Tournament"]["location"] }}
+
+      <i class="material-icons float-right">play_arrow</i>
     </a>
   {% endfor %}
+
   </ul>
 </div>
