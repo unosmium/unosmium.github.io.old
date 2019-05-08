@@ -4,6 +4,30 @@ layout: base
 
 {%- include results_nav.html -%}
 
-<main class="container mt-5" aria-label="Content">
-  {{ content }}
+<main class="container-fluid mt-5" aria-label="Content">
+{{ content }}
+
+{% assign tournament = page.path | split: '.' | first | split: '/' | last %}
+
+{% assign teams = site.data[tournament]['Teams'] %}
+{% assign events = site.data[tournament]['Events'] %}
+
+<table>
+
+  <tr>
+    <th></th>
+    <th></th>
+  {% for event in events %}
+    <th>{{ event.name }}</th>
+  {% endfor %}
+  </tr>
+
+{% for team in teams %}
+  <tr>
+    <td>{{ team.number }}</td>
+    <td>{{ team.school }}</td>
+  </tr>
+{% endfor %}
+
+</table>
 </main>
