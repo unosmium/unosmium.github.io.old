@@ -29,8 +29,27 @@ layout: base
     <td>{{ team.school }}</td>
 
     {% for event in events %}
-      {% assign placing = placings | where: 'team', team.number | where: 'event', event.name %}
-      <td>{{ placing.first.place }}</td>
+      {% assign placing = placings | where: 'team', team.number
+                                   | where: 'event', event.name
+                                   | first %}
+
+      <td>
+      {% if placing["disqualified"] %}
+        {{ teams.size | plus: 2 }}
+
+      {% elsif placing["participated"] == false %}
+        {{ teams.size | plus: 1 }}
+
+      {% else %}
+        {% unless placing["place"] %}
+          {{ teams.size }}
+        {% else %}
+          {{ placing["place"] }}
+        {% endunless %}
+
+      {% endif %}
+      </td>
+
     {% endfor %}
   </tr>
 {% endfor %}
