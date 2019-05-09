@@ -19,6 +19,9 @@ layout: base
     <th class="left-info">#</th>
     <th class="left-info">School Name (State)</th>
   {% for event in events %}
+    {% if event.trial %}
+      {% continue %}
+    {% endif %}
     <th class="event">{{ event.name }}</th>
   {% endfor %}
     <th class="right-info">Penalties</th>
@@ -34,6 +37,11 @@ layout: base
     {% assign total_points = 0 %}
 
     {% for event in events %}
+
+      {% if event.trial %}
+        {% continue %}
+      {% endif %}
+
       {% assign placing = placings | where: 'team', team.number
                                    | where: 'event', event.name
                                    | first %}
