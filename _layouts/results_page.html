@@ -16,41 +16,53 @@ layout: base
 <table class="results-table-classic mx-auto">
 
   <tr>
-    <th></th>
-    <th></th>
+    <th class="left-info">#</th>
+    <th class="left-info">School Name (State)</th>
   {% for event in events %}
     <th class="event">{{ event.name }}</th>
   {% endfor %}
+    <th class="right-info">Penalties</th>
+    <th class="right-info">Total Team Points</th>
+    <th class="right-info">Final Team Rank</th>
   </tr>
 
 {% for team in teams %}
   <tr>
     <td>{{ team.number }}</td>
-    <td>{{ team.school }}</td>
+    <td>{{ team.school }} ({{ team.state }})</td>
+
+    {% assign total_points = 0 %}
 
     {% for event in events %}
       {% assign placing = placings | where: 'team', team.number
                                    | where: 'event', event.name
                                    | first %}
 
-      <td class="event-points">
       {% if placing["disqualified"] %}
-        {{ teams.size | plus: 2 }}
+        {% assign points = teams.size | plus: 2 %}
 
       {% elsif placing["participated"] == false %}
-        {{ teams.size | plus: 1 }}
+        {% assign points = teams.size | plus: 1 %}
 
       {% else %}
         {% unless placing["place"] %}
-          {{ teams.size }}
+          {% assign points = teams.size %}
         {% else %}
-          {{ placing["place"] }}
+          {% assign points = placing["place"] %}
         {% endunless %}
 
       {% endif %}
-      </td>
 
+      {% assign total_points = total_points | plus: points %}
+
+      <td class="event-points">
+        {{ points }}
+      </td>
     {% endfor %}
+
+    <td></td>
+    <td class="team-points">{{ total_points }}</td>
+    <td></td>
   </tr>
 {% endfor %}
 

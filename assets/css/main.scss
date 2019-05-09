@@ -14,10 +14,14 @@ header.results-header {
 }
 
 table.results-table-classic {
-  th.event {
+  th.event, th.right-info {
     writing-mode: vertical-lr;
     transform: rotate(180deg);
     width: 1.25rem;
+  }
+
+  th.left-info {
+
   }
 
   td {
@@ -25,6 +29,10 @@ table.results-table-classic {
   }
 
   td.event-points {
+    text-align: center;
+  }
+
+  td.team-points {
     text-align: center;
   }
 }
