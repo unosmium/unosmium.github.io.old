@@ -33,7 +33,7 @@ layout: base
                                    | where: 'event', event.name
                                    | first %}
 
-      <td>
+      <td class="event-points">
       {% if placing["disqualified"] %}
         {{ teams.size | plus: 2 }}
 
